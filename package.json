@@ -3,13 +3,11 @@
   "version": "0.0.1",
   "description": "Open-source lib for Event Sourcing in Node.js",
   "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/forevertz/node-event-sourcing.git"
   },
+  "homepage": "https://github.com/forevertz/node-event-sourcing",
   "keywords": [
     "CQRS",
     "eventsourcing",
@@ -17,10 +15,14 @@
     "eventstore",
     "event-store"
   ],
-  "author": "eventstore",
+  "author": "Improvertz",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/forevertz/node-event-sourcing/issues"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/forevertz/node-event-sourcing#readme"
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^1.14.2",
+    "standard": "^12.0.1"
+  }
 }
