@@ -1,1 +1,13 @@
-console.log('init')
+module.exports = {
+  // Global
+  EventReceiver: require('./EventReceiver'),
+  EventArchivist: require('./EventArchivist'),
+  EventProcessor: require('./EventProcessor'),
+  StateReader: require('./StateReader'),
+  // EventStores
+  FileSystemEventStore: require('./EventStore/FileSystem'),
+  // Queues
+  InMemoryQueue: require('./Queue/InMemory'), // not recommended in production
+  // StateStores
+  InMemoryStateStore: require('./StateStore/InMemory') // not recommended in production
+}
