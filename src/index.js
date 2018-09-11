@@ -10,5 +10,6 @@ module.exports = {
   InMemoryQueue: require('./Queue/InMemory'), // not recommended in production
   RedisQueue: require('./Queue/Redis'),
   // StateStores
-  InMemoryStateStore: require('./StateStore/InMemory') // not recommended in production
+  InMemoryStateStore: require('./StateStore/InMemory'), // not recommended in production
+  RedisStateStore: require('./StateStore/Redis')
 }

@@ -1,3 +1,4 @@
+const InMemoryLock = require('../Lock/InMemory')
 const queue = require('../Queue/InMemory')
 
 /* Note: for development environments only */
@@ -13,7 +14,7 @@ InMemoryStateStore.prototype.readOnly = async function readOnly(key) {
 
 InMemoryStateStore.prototype.lockAndGet = async function lockAndGet(key) {
   if (!this.locks[key]) {
-    this.locks[key] = new Lock()
+    this.locks[key] = new InMemoryLock()
   }
   await this.locks[key].lock()
   return this.data[key]
@@ -32,28 +33,6 @@ InMemoryStateStore.prototype.subscribe = function subscribe(key, callback) {
 
 InMemoryStateStore.prototype.unsubscribe = function unsubscribe(key, callback) {
   queue.unsubscribe(`${key}-changed`, callback)
-}
-
-function Lock() {
-  this.isLocked = false
-  this.next = []
-  return {
-    lock: () => {
-      return new Promise(resolve => {
-        if (!this.isLocked) {
-          this.isLocked = true
-          resolve()
-        } else {
-          this.next.push(resolve)
-        }
-      })
-    },
-    unlock: () => {
-      this.isLocked = false
-      const next = this.next.shift()
-      if (next) next()
-    }
-  }
 }
 
 module.exports = new InMemoryStateStore()

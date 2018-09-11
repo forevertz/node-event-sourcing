@@ -7,8 +7,5 @@ const receiver = new EventReceiver({
 
 // Simulate increments every second
 setInterval(() => receiver.handle({ eventType: 'increment-counter-1' }), 1000)
-setTimeout(
-  () => setInterval(() => receiver.handle({ eventType: 'increment-counter-2' }), 1000),
-  500
-)
+setInterval(() => receiver.handle({ eventType: 'increment-counter-2' }), 1500)
 setTimeout(() => process.exit(0), 11000)

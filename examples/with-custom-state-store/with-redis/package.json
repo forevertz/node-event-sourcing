@@ -1,0 +1,16 @@
+{
+  "name": "with-redis-state-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run start:state-reader & npm run start:rest",
+    "start:redis": "docker run -it --rm -p 6379:6379 redis:alpine redis-server --appendonly yes",
+    "start:state-reader": "node state-reader.js",
+    "start:rest": "NODE_ENV=development node ."
+  },
+  "dependencies": {
+    "node-event-sourcing": "*",
+    "redis": "*"
+  }
+}
