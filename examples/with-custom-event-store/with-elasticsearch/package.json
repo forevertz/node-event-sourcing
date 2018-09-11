@@ -1,0 +1,15 @@
+{
+  "name": "with-elasticsearch-event-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=development node .",
+    "start:elasticsearch": "docker run -it --rm --name elasticsearch -p 9200:9200 -e discovery.type=single-node docker.elastic.co/elasticsearch/elasticsearch:6.4.0",
+    "start:kibana": "docker run -it --rm -p 5601:5601 --link elasticsearch docker.elastic.co/kibana/kibana:6.4.0"
+  },
+  "dependencies": {
+    "elasticsearch": "*",
+    "node-event-sourcing": "*"
+  }
+}

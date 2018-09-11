@@ -6,6 +6,7 @@ module.exports = {
   StateReader: require('./StateReader'),
   // EventStores
   FileSystemEventStore: require('./EventStore/FileSystem'),
+  ElasticsearchEventStore: require('./EventStore/Elasticsearch'),
   // Queues
   InMemoryQueue: require('./Queue/InMemory'), // not recommended in production
   RedisQueue: require('./Queue/Redis'),
