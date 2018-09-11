@@ -1,4 +1,4 @@
-function StateReader(stateStore) {
+function StateReader({ stateStore } = {}) {
   this.stateStore = stateStore || require('./StateStore/InMemory')
 
   if (

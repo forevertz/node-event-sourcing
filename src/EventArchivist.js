@@ -1,4 +1,4 @@
-function EventArchivist(queue, eventStore) {
+function EventArchivist({ queue, eventStore } = {}) {
   this.queue = queue || require('./Queue/InMemory')
   this.eventStore = eventStore || require('./EventStore/FileSystem')
 

@@ -8,6 +8,7 @@ module.exports = {
   FileSystemEventStore: require('./EventStore/FileSystem'),
   // Queues
   InMemoryQueue: require('./Queue/InMemory'), // not recommended in production
+  RedisQueue: require('./Queue/Redis'),
   // StateStores
   InMemoryStateStore: require('./StateStore/InMemory') // not recommended in production
 }

@@ -1,4 +1,4 @@
-function EventProcessor(queue, stateStore) {
+function EventProcessor({ queue, stateStore } = {}) {
   this.queue = queue || require('./Queue/InMemory')
   this.stateStore = stateStore || require('./StateStore/InMemory')
 

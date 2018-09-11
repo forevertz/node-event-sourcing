@@ -1,4 +1,4 @@
-function EventReceiver(queue) {
+function EventReceiver({ queue } = {}) {
   this.queue = queue || require('./Queue/InMemory')
 
   if (this.queue.constructor.name === 'InMemoryQueue' && process.env.NODE_ENV !== 'development') {
