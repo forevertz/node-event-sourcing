@@ -9,6 +9,7 @@ module.exports = {
   ElasticsearchEventStore: require('./EventStore/Elasticsearch'),
   // Queues
   InMemoryQueue: require('./Queue/InMemory'), // not recommended in production
+  KafkaQueue: require('./Queue/Kafka'),
   RedisQueue: require('./Queue/Redis'),
   // StateStores
   InMemoryStateStore: require('./StateStore/InMemory'), // not recommended in production
