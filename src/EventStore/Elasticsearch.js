@@ -4,7 +4,7 @@ function ElasticsearchEventStore(elasticsearchClient) {
 
 ElasticsearchEventStore.prototype.store = async function store(data, domain) {
   const date = new Date(data.eventDate).toISOString().substr(0, 10)
-  this.client.index({ index: `${domain}_${date}`, type: domain, body: data })
+  await this.client.index({ index: `${domain}_${date}`, type: domain, body: data })
 }
 
 ElasticsearchEventStore.prototype.find = async function find(domain, { from }, treatChunk) {
