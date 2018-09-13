@@ -18,7 +18,7 @@ KafkaQueue.prototype.publish = function publish(type, event) {
 
 KafkaQueue.prototype.subscribe = function subscribe(type, callback) {
   if (!this.listeners[type] && this.consumer) {
-    this.consumer.addTopics([type])
+    this.consumer.addTopics([type], () => {})
   }
   this.listeners[type] = [...(this.listeners[type] || []), callback]
   return () => this.unsubscribe(type, callback)
