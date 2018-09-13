@@ -28,7 +28,7 @@ KafkaQueue.prototype.unsubscribe = function unsubscribe(type, callback) {
   this.listeners[type] = this.listeners[type].filter(listener => listener !== callback)
   if (this.listeners[type].length === 0) {
     delete this.listeners[type]
-    if (this.consumer) this.consumer.removeTopics([type])
+    if (this.consumer) this.consumer.removeTopics([type], () => {})
   }
 }
 
