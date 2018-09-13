@@ -5,8 +5,9 @@ $ git clone https://github.com/forevertz/node-event-sourcing.git
 $ cd node-event-sourcing/examples/with-custom-event-store/with-elasticsearch
 $ npm install
 $ npm run start:elasticsearch
-# in an other terminal (optional)
+# In an other terminal (optional)
 $ npm run start:kibana
-# in an other terminal
+# In an other terminal
 $ npm start
+# To verify that event are saved => http://localhost:9200/event_*/_search
 ```

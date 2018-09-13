@@ -1,0 +1,14 @@
+{
+  "name": "event-archivist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "micro"
+  },
+  "dependencies": {
+    "kafka-node": "*",
+    "micro": "^9.3.3",
+    "node-event-sourcing": "*"
+  }
+}

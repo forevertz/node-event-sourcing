@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+
+  kafka:
+    image: wurstmeister/kafka
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CREATE_TOPICS=event:1:1
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    links:
+      - zookeeper
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200 # to verify that event are saved => http://localhost:9200/event_*/_search
+
+  redis:
+    image: redis:alpine
+    command: ['redis-server', '--appendonly yes']
+
+  receiver:
+    build: ./receiver-microservice
+    links:
+      - zookeeper
+      - kafka
+    ports:
+      - 3001:3000
+
+  archivist:
+    build: ./event-archivist
+    links:
+      - zookeeper
+      - kafka
+      - elasticsearch
+
+  eventprocessor:
+    build: ./event-processor
+    links:
+      - zookeeper
+      - kafka
+      - redis
+
+  myapp:
+    build: ./myapp
+    links:
+      - redis
+    ports:
+      - 3000:3000

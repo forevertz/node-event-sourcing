@@ -45,6 +45,9 @@ const receiver = new EventReceiver({
   queue: ..., // optional, default: InMemoryQueue (not recommended in production)
   queueName: ... // optional, default: 'event'
 })
+
+const event = { eventType: 'increment-counter-1' }
+receiver.handle(event)
 ```
 
 ```javascript
@@ -87,4 +90,7 @@ import { StateReader } from 'node-event-sourcing'
 const state = new StateReader({
   stateStore: ... // optional, default: InMemoryStateStore (not recommended in production)
 })
+
+state.get('increment-counter-1').then(counter1 => console.log(counter1))
+state.subscribe('increment-counter-1', counter1 => console.log(counter1))
 ```

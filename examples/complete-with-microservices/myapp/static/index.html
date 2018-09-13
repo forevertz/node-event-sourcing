@@ -1,0 +1,59 @@
+<div class="section">
+  <button onclick="incrementCounter(1)">Increment counter 1</button>
+  <button onclick="incrementCounter(2)">Increment counter 2</button>
+</div>
+
+<div class="section">
+  <div>Refreshed every 2 seconds:</div>
+  <div>Counter 1: <span id="counter-1">...</span></div>
+  <div>Counter 2: <span id="counter-2">...</span></div>
+</div>
+
+<div class="section">
+  <div>Refreshed by websockets:</div>
+  <div>Counter 1: <span id="counter-ws-1">...</span></div>
+  <div>Counter 2: <span id="counter-ws-2">...</span></div>
+</div>
+
+<div class="section">
+  <a href="http://localhost:9200/event_*/_search" target="_blank">See stored events</a>
+</div>
+
+<script src="http://localhost:3000/socket.io.min.js"></script>
+<script>
+  function incrementCounter(counterId) {
+    fetch('http://localhost:3001/event', {
+      method: 'POST',
+      body: JSON.stringify({ eventType: `increment-counter-${counterId}` })
+    })
+  }
+
+  function setHTML(elementId, content) {
+    document.getElementById(elementId).innerHTML = content
+  }
+
+  function refreshCounterPeriodically(counterId) {
+    setInterval(async () => {
+      const response = await fetch(`http://localhost:3000/counter?id=${counterId}`)
+      setHTML(`counter-${counterId}`, (await response.json()).result)
+    }, 2000)
+  }
+  refreshCounterPeriodically(1)
+  refreshCounterPeriodically(2)
+
+  function refreshCountersThroughWebsockets() {
+    const socket = io('http://localhost:3000')
+    socket.on('change', ({ key, value }) => {
+      setHTML(`counter-ws-${key.split(':')[1]}`, value)
+    })
+    socket.emit('subscribe', 'counter:1')
+    socket.emit('subscribe', 'counter:2')
+  }
+  refreshCountersThroughWebsockets()
+</script>
+
+<style>
+  .section {
+    margin-top: 20px;
+  }
+</style>
