@@ -4,9 +4,9 @@
 </div>
 
 <div class="section">
-  <div>Refreshed every 2 seconds:</div>
   <div>Counter 1: <span id="counter-1">...</span></div>
   <div>Counter 2: <span id="counter-2">...</span></div>
+  <button onclick="refreshCounter(1) && refreshCounter(2)">Refresh</button>
 </div>
 
 <div class="section">
@@ -32,14 +32,12 @@
     document.getElementById(elementId).innerHTML = content
   }
 
-  function refreshCounterPeriodically(counterId) {
-    setInterval(async () => {
-      const response = await fetch(`http://localhost:3000/counter?id=${counterId}`)
-      setHTML(`counter-${counterId}`, (await response.json()).result)
-    }, 2000)
+  async function refreshCounter(counterId) {
+    const response = await fetch(`http://localhost:3000/counter?id=${counterId}`)
+    setHTML(`counter-${counterId}`, (await response.json()).result)
   }
-  refreshCounterPeriodically(1)
-  refreshCounterPeriodically(2)
+  refreshCounter(1)
+  refreshCounter(2)
 
   function refreshCountersThroughWebsockets() {
     const socket = io('http://localhost:3000')

@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node ."
   },
   "dependencies": {
-    "micro": "^9.3.3",
+    "micro": "*",
     "node-event-sourcing": "*",
     "redis": "*",
     "serve-handler": "*",

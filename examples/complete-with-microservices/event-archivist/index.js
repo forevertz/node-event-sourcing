@@ -30,9 +30,10 @@ async function configureElasticsearch() {
 }
 configureElasticsearch()
 
+const kafkaConfig = { host: 'zookeeper:2181', kafkaHost: 'kafka:9092' }
 const archivist = new EventArchivist({
   queue: new KafkaQueue({
-    consumer: new kafka.Consumer(new kafka.Client('zookeeper:2181'), [{ topic: 'event' }])
+    consumer: new kafka.ConsumerGroup({ ...kafkaConfig, groupId: 'ArchivistGroup' }, ['event'])
   }),
   eventStore: new ElasticsearchEventStore(elasticsearchClient)
 })

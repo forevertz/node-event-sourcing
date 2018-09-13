@@ -2,7 +2,7 @@ const { EventReceiver, KafkaQueue } = require('node-event-sourcing')
 const kafka = require('kafka-node')
 
 const receiver = new EventReceiver({
-  queue: new KafkaQueue({ producer: new kafka.Producer(new kafka.Client()) })
+  queue: new KafkaQueue({ producer: new kafka.Producer(new kafka.KafkaClient()) })
 })
 
 console.log('Simulating increments')

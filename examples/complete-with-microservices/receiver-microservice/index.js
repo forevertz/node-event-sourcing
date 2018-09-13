@@ -2,8 +2,9 @@ const kafka = require('kafka-node')
 const { json } = require('micro')
 const { EventReceiver, KafkaQueue } = require('node-event-sourcing')
 
+const kafkaConfig = { host: 'zookeeper:2181', kafkaHost: 'kafka:9092' }
 const receiver = new EventReceiver({
-  queue: new KafkaQueue({ producer: new kafka.Producer(new kafka.Client('zookeeper:2181')) })
+  queue: new KafkaQueue({ producer: new kafka.Producer(new kafka.KafkaClient(kafkaConfig)) })
 })
 
 module.exports = async (req, res) => {

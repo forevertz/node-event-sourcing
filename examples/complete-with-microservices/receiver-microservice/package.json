@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "kafka-node": "*",
-    "micro": "^9.3.3",
+    "micro": "*",
     "node-event-sourcing": "*"
   }
 }

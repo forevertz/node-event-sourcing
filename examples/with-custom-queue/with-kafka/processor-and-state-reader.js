@@ -4,11 +4,10 @@ const kafka = require('kafka-node')
 /*
 Note: EventProcessor and StateReader in a single file for demonstration purposes.
 */
-const kafkaClient = new kafka.Client()
 const processor = new EventProcessor({
   queue: new KafkaQueue({
-    producer: new kafka.Producer(kafkaClient),
-    consumer: new kafka.Consumer(kafkaClient, [{ topic: 'event' }])
+    producer: new kafka.Producer(new kafka.KafkaClient()),
+    consumer: new kafka.ConsumerGroup({ groupId: 'ProcessorGroup' }, ['event'])
   })
 })
 processor.on('increment-counter-1', async (event, stateStore) => {

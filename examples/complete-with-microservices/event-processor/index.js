@@ -2,11 +2,11 @@ const kafka = require('kafka-node')
 const { EventProcessor, KafkaQueue, RedisStateStore } = require('node-event-sourcing')
 const redis = require('redis')
 
-const kafkaClient = new kafka.Client('zookeeper:2181')
+const kafkaConfig = { host: 'zookeeper:2181', kafkaHost: 'kafka:9092' }
 const processor = new EventProcessor({
   queue: new KafkaQueue({
-    producer: new kafka.Producer(kafkaClient),
-    consumer: new kafka.Consumer(kafkaClient, [{ topic: 'event' }])
+    producer: new kafka.Producer(new kafka.KafkaClient(kafkaConfig)),
+    consumer: new kafka.ConsumerGroup({ ...kafkaConfig, groupId: 'ProcessorGroup' }, ['event'])
   }),
   stateStore: new RedisStateStore(redis.createClient('//redis:6379'))
 })
