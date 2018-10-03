@@ -7,7 +7,7 @@ function EventReceiver({ queue, queueName } = {}) {
   }
 }
 
-EventReceiver.prototype.handle = function handle(event) {
+EventReceiver.prototype.emit = function emit(event) {
   if (!event.eventDate) event.eventDate = new Date().getTime()
   this.queue.publish(this.queueName, event)
 }

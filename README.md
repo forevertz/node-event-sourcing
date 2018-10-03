@@ -47,7 +47,7 @@ const receiver = new EventReceiver({
 })
 
 const event = { eventType: 'increment-counter-1' }
-receiver.handle(event)
+receiver.emit(event)
 ```
 
 ```javascript

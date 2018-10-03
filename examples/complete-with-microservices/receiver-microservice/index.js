@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     return ''
   } else if (req.method === 'POST' && pathname === '/event') {
     const event = await json(req, { encoding: 'utf8' })
-    receiver.handle(event)
+    receiver.emit(event)
     return { success: true }
   } else {
     return 'Welcome! Please POST on /event to add an event.'
