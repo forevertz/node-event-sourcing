@@ -34,8 +34,8 @@ const archivist = new EventArchivist({
 archivist.run()
 
 console.log('Simulating increments')
-setInterval(() => receiver.handle({ eventType: 'increment-counter-1' }), 1000)
-setInterval(() => receiver.handle({ eventType: 'increment-counter-2' }), 1500)
+setInterval(() => receiver.emit({ eventType: 'increment-counter-1' }), 1000)
+setInterval(() => receiver.emit({ eventType: 'increment-counter-2' }), 1500)
 console.log(`Open "http://localhost:9200/${queueName}_*/_search" to see the stored events.`)
 setTimeout(async () => {
   console.log('Saved events:')
