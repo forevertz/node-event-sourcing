@@ -57,7 +57,8 @@ import { EventArchivist } from 'node-event-sourcing'
 const archivist = new EventArchivist({
   queue: ..., // optional, default: InMemoryQueue (not recommended in production)
   queueName: ..., // optional, default: 'event'
-  eventStore: ... // optional, default: FileSystemEventStore
+  eventStore: ..., // optional, default: FileSystemEventStore
+  transform: ..., // optional, default: identity function
 })
 archivist.run()
 ```
