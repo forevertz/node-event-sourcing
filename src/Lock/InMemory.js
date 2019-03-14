@@ -15,9 +15,12 @@ InMemoryLock.prototype.lock = async function lock(key) {
 }
 
 InMemoryLock.prototype.unlock = async function unlock(key) {
-  this.isLocked = false
   const next = this.next.shift()
-  if (next) next()
+  if (next) {
+    next()
+  } else {
+    this.isLocked = false
+  }
 }
 
 module.exports = InMemoryLock
