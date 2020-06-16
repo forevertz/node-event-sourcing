@@ -92,6 +92,7 @@ const state = new StateReader({
   stateStore: ... // optional, default: InMemoryStateStore (not recommended in production)
 })
 
-state.get('increment-counter-1').then(counter1 => console.log(counter1))
-state.subscribe('increment-counter-1', counter1 => console.log(counter1))
+state.get('counter:1').then(counter1 => console.log(counter1))
+// AND/OR
+state.subscribe('counter:1', counter1 => console.log(counter1))
 ```
